@@ -3,12 +3,14 @@ import "./App.css";
 import Categories from "./components/Categories";
 import HeaderComponent from "./components/HeaderComponent";
 import ProductFeatures from "./components/ProductFeatures";
+import HeadphonesPage from "./components/HeadphonesPage";
 import About from "./components/About";
 import Footer from "./components/Footer";
 
 function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState("home");
 
   useEffect(() => {
     fetch("https://raw.githubusercontent.com/lomsadze123/audiophile-ecommerce-website/refs/heads/master/public/data.json")
@@ -34,14 +36,32 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      <HeaderComponent heroProduct={heroProduct} />
+      <HeaderComponent 
+        heroProduct={heroProduct} 
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+      
       <main>
-        <Categories />
-        <ProductFeatures 
-          zx9={zx9Speaker} 
-          zx7={zx7Speaker} 
-          yx1={yx1Earphones} 
-        />
+        {currentPage === "home" ? (
+          <>
+            <Categories />
+            <ProductFeatures 
+              zx9={zx9Speaker} 
+              zx7={zx7Speaker} 
+              yx1={yx1Earphones} 
+            />
+          </>
+        ) : (
+          <>
+            <HeadphonesPage products={products} />
+            
+            <div className="category-page" style={{ paddingBottom: '120px' }}>
+              <Categories />
+            </div>
+          </>
+        )}
+        
         <About />
       </main>
       <Footer />
