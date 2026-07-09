@@ -4,6 +4,8 @@ import Categories from "./components/Categories";
 import HeaderComponent from "./components/HeaderComponent";
 import ProductFeatures from "./components/ProductFeatures";
 import HeadphonesPage from "./components/HeadphonesPage";
+import SpeakersPage from "./components/SpeakersPage";
+import EarphonesPage from "./components/EarphonesPage";
 import About from "./components/About";
 import Footer from "./components/Footer";
 
@@ -34,16 +36,10 @@ function App() {
   const zx7Speaker = products.find((p) => p.slug === "zx7-speaker");
   const yx1Earphones = products.find((p) => p.slug === "yx1-earphones");
 
-  return (
-    <div className="app-wrapper">
-      <HeaderComponent 
-        heroProduct={heroProduct} 
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
-      
-      <main>
-        {currentPage === "home" ? (
+  const renderContent = () => {
+    switch (currentPage) {
+      case "home":
+        return (
           <>
             <Categories />
             <ProductFeatures 
@@ -52,16 +48,48 @@ function App() {
               yx1={yx1Earphones} 
             />
           </>
-        ) : (
+        );
+      case "headphones":
+        return (
           <>
             <HeadphonesPage products={products} />
-            
             <div className="category-page" style={{ paddingBottom: '120px' }}>
               <Categories />
             </div>
           </>
-        )}
-        
+        );
+      case "speakers":
+        return (
+          <>
+            <SpeakersPage products={products} />
+            <div className="category-page" style={{ paddingBottom: '120px' }}>
+              <Categories />
+            </div>
+          </>
+        );
+      case "earphones":
+        return (
+          <>
+            <EarphonesPage products={products} />
+            <div className="category-page" style={{ paddingBottom: '120px' }}>
+              <Categories />
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="app-wrapper">
+      <HeaderComponent 
+        heroProduct={heroProduct} 
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
+      <main>
+        {renderContent()}
         <About />
       </main>
       <Footer />
