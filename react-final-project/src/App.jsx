@@ -15,7 +15,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState("home");
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/lomsadze123/audiophile-ecommerce-website/refs/heads/master/public/data.json")
+    fetch("http://localhost:3000/api/products")
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
