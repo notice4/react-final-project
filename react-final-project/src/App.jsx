@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Routes, Route, useParams, useNavigate, Navigate } from "react-router-dom";
 import "./App.css";
 import Categories from "./components/Categories";
 import HeaderComponent from "./components/HeaderComponent";
@@ -10,8 +11,59 @@ import About from "./components/About";
 import Footer from "./components/Footer";
 import useFetch from "./hooks/useFetch";
 
+const Home = ({ zx9Speaker, zx7Speaker, yx1Earphones }) => (
+  <>
+    <Categories />
+    <ProductFeatures 
+      zx9={zx9Speaker} 
+      zx7={zx7Speaker} 
+      yx1={yx1Earphones} 
+    />
+  </>
+);
+
+const CategoryPageWrapper = ({ products }) => {
+  const { categoryId } = useParams();
+  const navigate = useNavigate();
+  
+  const isAuthenticated = false; 
+  
+  if (categoryId === 'earphones' && !isAuthenticated) {
+    alert("You need to be logged in to view Earphones! Redirecting to Home.");
+    return <Navigate to="/" replace />;
+  }
+
+  let content = null;
+  switch (categoryId) {
+    case "headphones":
+      content = <HeadphonesPage products={products} />;
+      break;
+    case "speakers":
+      content = <SpeakersPage products={products} />;
+      break;
+    case "earphones":
+      content = <EarphonesPage products={products} />;
+      break;
+    default:
+      content = <div style={{padding: '100px', textAlign: 'center'}}>Category not found</div>;
+  }
+
+  return (
+    <>
+      {content}
+      <div className="category-page" style={{ paddingBottom: '120px' }}>
+        <Categories />
+      </div>
+      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+        <button onClick={() => navigate(-1)} className="btn" style={{ background: '#000', color: '#fff' }}>
+          Go Back
+        </button>
+      </div>
+    </>
+  );
+};
+
 function App() {
-  const [currentPage, setCurrentPage] = useState("home");
   const { data: products, loading } = useFetch("http://localhost:3000/api/products");
 
   if (loading) {
@@ -23,60 +75,20 @@ function App() {
   const zx7Speaker = products.find((p) => p.slug === "zx7-speaker");
   const yx1Earphones = products.find((p) => p.slug === "yx1-earphones");
 
-  const renderContent = () => {
-    switch (currentPage) {
-      case "home":
-        return (
-          <>
-            <Categories />
-            <ProductFeatures 
-              zx9={zx9Speaker} 
-              zx7={zx7Speaker} 
-              yx1={yx1Earphones} 
-            />
-          </>
-        );
-      case "headphones":
-        return (
-          <>
-            <HeadphonesPage products={products} />
-            <div className="category-page" style={{ paddingBottom: '120px' }}>
-              <Categories />
-            </div>
-          </>
-        );
-      case "speakers":
-        return (
-          <>
-            <SpeakersPage products={products} />
-            <div className="category-page" style={{ paddingBottom: '120px' }}>
-              <Categories />
-            </div>
-          </>
-        );
-      case "earphones":
-        return (
-          <>
-            <EarphonesPage products={products} />
-            <div className="category-page" style={{ paddingBottom: '120px' }}>
-              <Categories />
-            </div>
-          </>
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="app-wrapper">
-      <HeaderComponent 
-        heroProduct={heroProduct} 
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <HeaderComponent heroProduct={heroProduct} />
       <main>
-        {renderContent()}
+        <Routes>
+          <Route 
+            path="/" 
+            element={<Home zx9Speaker={zx9Speaker} zx7Speaker={zx7Speaker} yx1Earphones={yx1Earphones} />} 
+          />
+          <Route 
+            path="/category/:categoryId" 
+            element={<CategoryPageWrapper products={products} />} 
+          />
+        </Routes>
         <About />
       </main>
       <Footer />
