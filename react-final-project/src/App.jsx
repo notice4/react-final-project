@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
-import { Routes, Route, useParams, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useParams, useNavigate, Navigate, Outlet } from "react-router-dom";
 import "./App.css";
 import Categories from "./components/Categories";
 import HeaderComponent from "./components/HeaderComponent";
@@ -11,6 +11,7 @@ import SpeakersPage from "./components/SpeakersPage";
 import EarphonesPage from "./components/EarphonesPage";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import Login from "./components/Login";
 import useFetch from "./hooks/useFetch";
 
 const Home = ({ zx9Speaker, zx7Speaker, yx1Earphones }) => (
@@ -73,8 +74,21 @@ const ContentWrapper = ({ children }) => {
   );
 };
 
+const MainLayout = ({ heroProduct }) => (
+  <>
+    <HeaderComponent heroProduct={heroProduct} />
+    <main>
+      <Outlet />
+      <ContentWrapper>
+        <About />
+      </ContentWrapper>
+    </main>
+    <Footer />
+  </>
+);
+
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
   const { data: products, loading, error } = useFetch("/api/products");
 
   if (loading) {
@@ -98,9 +112,9 @@ function App() {
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       <div className="app-wrapper">
-        <HeaderComponent heroProduct={heroProduct} />
-        <main>
-          <Routes>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route element={<MainLayout heroProduct={heroProduct} />}>
             <Route 
               path="/" 
               element={<Home zx9Speaker={zx9Speaker} zx7Speaker={zx7Speaker} yx1Earphones={yx1Earphones} />} 
@@ -109,12 +123,8 @@ function App() {
               path="/category/:categoryId" 
               element={<CategoryPageWrapper products={products} />} 
             />
-          </Routes>
-          <ContentWrapper>
-            <About />
-          </ContentWrapper>
-        </main>
-        <Footer />
+          </Route>
+        </Routes>
       </div>
     </AuthContext.Provider>
   );
