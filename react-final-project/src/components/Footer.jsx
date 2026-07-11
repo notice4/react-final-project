@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const [message, setMessage] = useState('');
@@ -38,12 +39,12 @@ export default function Footer() {
       <div className="container footer-wrap">
         <div className="footer-line"></div>
         <div className="footer-top">
-          <a href="/" className="logo">audiophile</a>
+          <Link to="/" className="logo">audiophile</Link>
           <nav className="footer-nav">
-            <a href="/" className="footer-link">Home</a>
-            <a href="/headphones" className="footer-link">Headphones</a>
-            <a href="/speakers" className="footer-link">Speakers</a>
-            <a href="/earphones" className="footer-link">Earphones</a>
+            <Link to="/" className="footer-link">Home</Link>
+            <Link to="/category/headphones" className="footer-link">Headphones</Link>
+            <Link to="/category/speakers" className="footer-link">Speakers</Link>
+            <Link to="/category/earphones" className="footer-link">Earphones</Link>
           </nav>
         </div>
         <div className="footer-bottom">

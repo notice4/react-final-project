@@ -1,52 +1,42 @@
 import React from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import headphonesImg from '../pictures/headphones.png';
 
-export default function HeaderComponent({ heroProduct, currentPage, setCurrentPage }) {
-    const handleNavigation = (e, page) => {
-    e.preventDefault();
-    setCurrentPage(page);
-  };
+export default function HeaderComponent({ heroProduct }) {
+  const location = useLocation();
 
   return (
     <>
       <header className="header">
         <div className="container header-wrap">
-          <a 
-            href="/" 
-            className="logo" 
-            onClick={(e) => handleNavigation(e, 'home')}
-          >
+          <Link to="/" className="logo">
             audiophile
-          </a>
+          </Link>
           <nav className="menu">
-            <a 
-              href="/" 
-              className={`menu-link ${currentPage === 'home' ? 'active' : ''}`}
-              onClick={(e) => handleNavigation(e, 'home')}
+            <NavLink 
+              to="/" 
+              className={({ isActive }) => `menu-link ${isActive ? 'active' : ''}`}
             >
               Home
-            </a>
-            <a 
-              href="/headphones" 
-              className={`menu-link ${currentPage === 'headphones' ? 'active' : ''}`}
-              onClick={(e) => handleNavigation(e, 'headphones')}
+            </NavLink>
+            <NavLink 
+              to="/category/headphones" 
+              className={({ isActive }) => `menu-link ${isActive ? 'active' : ''}`}
             >
               Headphones
-            </a>
-            <a 
-              href="/speakers" 
-              className={`menu-link ${currentPage === 'speakers' ? 'active' : ''}`}
-              onClick={(e) => handleNavigation(e, 'speakers')}
+            </NavLink>
+            <NavLink 
+              to="/category/speakers" 
+              className={({ isActive }) => `menu-link ${isActive ? 'active' : ''}`}
             >
               Speakers
-            </a>
-            <a 
-              href="/earphones" 
-              className={`menu-link ${currentPage === 'earphones' ? 'active' : ''}`}
-              onClick={(e) => handleNavigation(e, 'earphones')}
+            </NavLink>
+            <NavLink 
+              to="/category/earphones" 
+              className={({ isActive }) => `menu-link ${isActive ? 'active' : ''}`}
             >
               Earphones
-            </a>
+            </NavLink>
           </nav>
           <button className="cart-btn" aria-label="Cart">
             <i className="fa-solid fa-cart-shopping cart-icon"></i>
@@ -54,7 +44,7 @@ export default function HeaderComponent({ heroProduct, currentPage, setCurrentPa
         </div>
       </header>
 
-      {currentPage === 'home' && (
+      {location.pathname === '/' && (
         <section className="hero">
           <div className="container hero-wrap">
             <div className="hero-info">
