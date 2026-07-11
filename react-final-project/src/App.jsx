@@ -8,24 +8,11 @@ import SpeakersPage from "./components/SpeakersPage";
 import EarphonesPage from "./components/EarphonesPage";
 import About from "./components/About";
 import Footer from "./components/Footer";
+import useFetch from "./hooks/useFetch";
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState("home");
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error with loading data:", err);
-        setLoading(false);
-      });
-  }, []);
+  const { data: products, loading } = useFetch("http://localhost:3000/api/products");
 
   if (loading) {
     return <div className="loading">Loading data...</div>;
