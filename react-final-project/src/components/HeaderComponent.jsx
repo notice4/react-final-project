@@ -1,9 +1,18 @@
-import React from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import headphonesImg from '../pictures/headphones.png';
+import { AuthContext } from '../App';
 
 export default function HeaderComponent({ heroProduct }) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+    navigate('/');
+  };
 
   return (
     <>
@@ -37,6 +46,18 @@ export default function HeaderComponent({ heroProduct }) {
             >
               Earphones
             </NavLink>
+            {isAuthenticated ? (
+              <button className="menu-link" onClick={handleLogout} style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', color: 'inherit' }}>
+                Logout
+              </button>
+            ) : (
+              <NavLink 
+                to="/login" 
+                className={({ isActive }) => `menu-link ${isActive ? 'active' : ''}`}
+              >
+                Login
+              </NavLink>
+            )}
           </nav>
           <button className="cart-btn" aria-label="Cart">
             <i className="fa-solid fa-cart-shopping cart-icon"></i>

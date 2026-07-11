@@ -2,9 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const PORT = 3000;
+const SECRET_KEY = 'super-secret-key';
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +23,17 @@ try {
 
 app.get('/api/products', (req, res) => {
   res.json(productsData);
+});
+
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  
+  if (username && password) {
+    const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
+    res.json({ success: true, token });
+  } else {
+    res.status(401).json({ success: false, message: 'Invalid credentials' });
+  }
 });
 
 app.post('/api/contact', (req, res) => {
