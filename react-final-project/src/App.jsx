@@ -75,10 +75,19 @@ const ContentWrapper = ({ children }) => {
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { data: products, loading } = useFetch("http://localhost:3000/api/products");
+  const { data: products, loading, error } = useFetch("http://localhost:3000/api/products");
 
   if (loading) {
-    return <div className="loading">Loading data...</div>;
+    return <div className="loading" style={{ textAlign: 'center', padding: '50px' }}>Loading data...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="error" style={{ textAlign: 'center', color: 'red', padding: '50px' }}>
+        <h2>Oops! Something went wrong.</h2>
+        <p>Error loading data: {error.message}</p>
+      </div>
+    );
   }
 
   const heroProduct = products.find((p) => p.slug === "xx99-mark-two-headphones");
