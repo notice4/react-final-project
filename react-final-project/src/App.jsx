@@ -1,8 +1,8 @@
-import { createContext, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const AuthContext = createContext()
+import { AuthContext } from './context/AuthContext.jsx'
 import {
+
   Routes,
   Route,
   useParams,

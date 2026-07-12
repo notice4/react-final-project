@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom'
 import headphonesImg from '../pictures/headphones.png'
-import { AuthContext } from '../App'
+import { AuthContext } from '../context/AuthContext.jsx'
 
 export default function HeaderComponent({ heroProduct }) {
   const location = useLocation()
