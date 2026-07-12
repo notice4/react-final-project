@@ -3,6 +3,7 @@ import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -18,4 +19,17 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
+  {
+    files: ['api/**/*.js'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
+  {
+    files: ['**/*.test.js', '**/*.test.jsx'],
+    languageOptions: {
+      globals: { ...globals.jest, ...globals.node, ...globals.browser },
+    },
+  },
+  eslintConfigPrettier,
 ])

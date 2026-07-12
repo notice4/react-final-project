@@ -1,15 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import headphonesSmall from '../pictures/headphones2.png';
-import speakers from '../pictures/speakers.png';  
-import earphones from '../pictures/earphones.png'; 
+import { Link } from 'react-router-dom'
+import headphonesSmall from '../pictures/headphones2.png'
+import speakers from '../pictures/speakers.png'
+import earphones from '../pictures/earphones.png'
 
 export default function Categories() {
   const items = [
     { name: 'Headphones', link: '/category/headphones', img: headphonesSmall },
     { name: 'Speakers', link: '/category/speakers', img: speakers },
     { name: 'Earphones', link: '/category/earphones', img: earphones },
-  ];
+  ]
 
   return (
     <section className="categories">
@@ -27,5 +26,5 @@ export default function Categories() {
         ))}
       </div>
     </section>
-  );
+  )
 }

@@ -1,10 +1,9 @@
-import React from "react";
-import speakerZx9 from '../pictures/speaker_zx9.png';
-import speakerZx7 from '../pictures/speaker_zx7.png';
+import speakerZx9 from '../pictures/speaker_zx9.png'
+import speakerZx7 from '../pictures/speaker_zx7.png'
 
 function SpeakersPage({ products }) {
-  const zx9 = products.find((p) => p.slug === "zx9-speaker");
-  const zx7 = products.find((p) => p.slug === "zx7-speaker");
+  const zx9 = products.find((p) => p.slug === 'zx9-speaker')
+  const zx7 = products.find((p) => p.slug === 'zx7-speaker')
 
   return (
     <div className="category-page">
@@ -36,10 +35,9 @@ function SpeakersPage({ products }) {
             <button className="btn">See Product</button>
           </div>
         </div>
-
       </div>
     </div>
-  );
+  )
 }
 
-export default SpeakersPage;
+export default SpeakersPage
