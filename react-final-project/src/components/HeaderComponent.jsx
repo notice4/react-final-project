@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom'
 import headphonesImg from '../pictures/headphones.png'
 import { AuthContext } from '../context/AuthContext.jsx'
@@ -7,10 +7,12 @@ export default function HeaderComponent({ heroProduct }) {
   const location = useLocation()
   const navigate = useNavigate()
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const handleLogout = () => {
     localStorage.removeItem('token')
     setIsAuthenticated(false)
+    setIsMenuOpen(false)
     navigate('/')
   }
 
@@ -18,12 +20,22 @@ export default function HeaderComponent({ heroProduct }) {
     <>
       <header className="header">
         <div className="container header-wrap">
-          <Link to="/" className="logo">
+          <button
+            className="burger-btn"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            <i
+              className={`fa-solid ${isMenuOpen ? 'fa-xmark' : 'fa-bars'}`}
+            ></i>
+          </button>
+          <Link to="/" className="logo" onClick={() => setIsMenuOpen(false)}>
             audiophile
           </Link>
-          <nav className="menu">
+          <nav className={`menu ${isMenuOpen ? 'open' : ''}`}>
             <NavLink
               to="/"
+              onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `menu-link ${isActive ? 'active' : ''}`
               }
@@ -32,6 +44,7 @@ export default function HeaderComponent({ heroProduct }) {
             </NavLink>
             <NavLink
               to="/category/headphones"
+              onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `menu-link ${isActive ? 'active' : ''}`
               }
@@ -40,6 +53,7 @@ export default function HeaderComponent({ heroProduct }) {
             </NavLink>
             <NavLink
               to="/category/speakers"
+              onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `menu-link ${isActive ? 'active' : ''}`
               }
@@ -48,6 +62,7 @@ export default function HeaderComponent({ heroProduct }) {
             </NavLink>
             <NavLink
               to="/category/earphones"
+              onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
                 `menu-link ${isActive ? 'active' : ''}`
               }
@@ -72,6 +87,7 @@ export default function HeaderComponent({ heroProduct }) {
             ) : (
               <NavLink
                 to="/login"
+                onClick={() => setIsMenuOpen(false)}
                 className={({ isActive }) =>
                   `menu-link ${isActive ? 'active' : ''}`
                 }
