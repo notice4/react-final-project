@@ -1,15 +1,14 @@
-import React from "react";
-import earphonesYx1 from '../pictures/earphones_yx1.png';
+import earphonesYx1 from '../pictures/earphones_yx1.png'
 
 function EarphonesPage({ products }) {
-  const yx1 = products.find((p) => p.slug === "yx1-earphones");
+  const yx1 = products.find((p) => p.slug === 'yx1-earphones')
 
   return (
     <div className="category-page">
       <div className="category-title-banner">
         <h2>EARPHONES</h2>
       </div>
-      
+
       <div className="container products-category-list">
         <div className="category-product-card">
           <div className="product-image-box">
@@ -24,7 +23,7 @@ function EarphonesPage({ products }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default EarphonesPage;
+export default EarphonesPage

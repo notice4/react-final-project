@@ -1,12 +1,11 @@
-import React from "react";
-import headphonesMark2 from '../pictures/headphones_mark2.png';
-import headphonesMark1 from '../pictures/headphones_mark1.png';
-import headphonesXX59 from '../pictures/headphones_xx59.png';
+import headphonesMark2 from '../pictures/headphones_mark2.png'
+import headphonesMark1 from '../pictures/headphones_mark1.png'
+import headphonesXX59 from '../pictures/headphones_xx59.png'
 
 function HeadphonesPage({ products }) {
-  const mark2 = products.find((p) => p.slug === "xx99-mark-two-headphones");
-  const mark1 = products.find((p) => p.slug === "xx99-mark-one-headphones");
-  const xx59 = products.find((p) => p.slug === "xx59-headphones");
+  const mark2 = products.find((p) => p.slug === 'xx99-mark-two-headphones')
+  const mark1 = products.find((p) => p.slug === 'xx99-mark-one-headphones')
+  const xx59 = products.find((p) => p.slug === 'xx59-headphones')
 
   return (
     <div className="category-page">
@@ -15,7 +14,6 @@ function HeadphonesPage({ products }) {
       </div>
 
       <div className="container products-category-list">
-        
         <div className="category-product-card">
           <div className="product-image-box">
             <img src={headphonesMark2} alt="XX99 Mark II Headphones" />
@@ -51,10 +49,9 @@ function HeadphonesPage({ products }) {
             <button className="btn">See Product</button>
           </div>
         </div>
-
       </div>
     </div>
-  );
+  )
 }
 
-export default HeadphonesPage;
+export default HeadphonesPage

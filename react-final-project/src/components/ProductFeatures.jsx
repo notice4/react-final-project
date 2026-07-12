@@ -1,13 +1,11 @@
-import React from 'react';
-import orange_speaker from '../pictures/orange_speaker.png';
-import speakerZx7 from '../pictures/zx7 speaker.png'; 
-import small_earphones from '../pictures/small_earphones.png';
+import orange_speaker from '../pictures/orange_speaker.png'
+import speakerZx7 from '../pictures/zx7 speaker.png'
+import small_earphones from '../pictures/small_earphones.png'
 
 export default function ProductFeatures({ zx9, zx7, yx1 }) {
   return (
     <section className="features-section">
       <div className="container">
-        
         <div className="feature-orange">
           <div className="feature-orange-img">
             <img src={orange_speaker} alt="ZX9 Speaker" />
@@ -38,8 +36,7 @@ export default function ProductFeatures({ zx9, zx7, yx1 }) {
             <button className="btn-outline">See Product</button>
           </div>
         </div>
-
       </div>
     </section>
-  );
+  )
 }
