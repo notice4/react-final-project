@@ -1,16 +1,23 @@
-# React + Vite
+# 🚀 React Final Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**🌐 Live Demo:** [https://react-final-project-one-orpin.vercel.app/](https://react-final-project-one-orpin.vercel.app/)
 
-Currently, two official plugins are available:
+მოცემული პროექტი არის სრულყოფილი React აპლიკაცია, რომელიც აგებულია თანამედროვე სტანდარტების და საუკეთესო პრაქტიკების გამოყენებით.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### 🛠️ ტექნოლოგიები და ინსტრუმენტები
+* Vite & React
+* ES6+ / JavaScript
+* React Router
+* Context API
+* Node.js & Express
+* ESLint & Prettier
 
-## React Compiler
+### ✨ ძირითადი ფუნქციონალი
+* **Reusable კომპონენტები:** UI დაყოფილია მრავალჯერადად გამოყენებად ნაწილებად (`props` და `children` მხარდაჭერით).
+* **მონაცემების დინამიური წამოღება (Data Fetching):** შექმნილია Custom Hook (`useFetch`), რომელიც იღებს API-დან მონაცემებს და მართავს `loading` და `error` მდგომარეობებს.
+* **ავტორიზაცია (Authentication):** დანერგილია Login/Logout სისტემა `localStorage`-ის გამოყენებით. დახურული გვერდები ხელმისაწვდომია მხოლოდ ავტორიზებული პირებისთვის.
+* **ფორმები და ვალიდაცია:** მონაცემების ვალიდაციისთვის გამოიყენება `react-hook-form` (Controlled inputs, error messages).
+* **State Management:** ლოკალური state იმართება `useState`-ით (Lifting state up), ხოლო გლობალური `useContext`-ით.
+* **ტესტირება:** დაწერილია Unit ტესტები `Vitest`-ისა და `React Testing Library`-ის მეშვეობით (`npm run test`).
+* **ანიმაციები:** ინტერფეისის გამოცდილების (UX) გასაუმჯობესებლად აქტიურად გამოიყენება CSS transitions.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
